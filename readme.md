@@ -15,3 +15,5 @@ A “Safe Trip” bonus of 300 points is earned if a team travels 1000 miles wit
 If a team travels 1000 miles before the other team plays any distance cards, they earn a 500 point bonus.
 
 A winner is declared when a team scores 5000 points. If both teams break 5000 points in the same round, the win goes to the team with the highest number of points. While it is unstated in the rules, in the rare instance of both teams breaking 5000 points and having the same score, play an additional round to break the tie.
+
+https://www.gameyum.com/other-card-games/105088-the-rules-for-mille-bornes-the-card-game/

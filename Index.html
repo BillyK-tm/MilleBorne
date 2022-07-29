@@ -3,15 +3,91 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=2.0" />
+    <link rel="stylesheet" href="./styles.css" />
     <title>Mille Borne</title>
   </head>
   <body>
-    <h1>Welcome to Mille Borne Calculator</h1>
-    <h2>Round Scores</h2>
-    <p>Player 1 / Player 2</p>
-    <p>
-      <script src="index.js"></script>
-    </p>
+    <nav class="navbar">
+      <div class="container">
+        <div class="logo">Welcome to Mille Bourne</div>
+        <ul class="nav">
+          <li>
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Contact </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="scores">
+      <div class="player">
+        <p id="player1Name">Player 1</p>
+        <p input type="string" id="player1Name">Player 1</p>
+        <p>
+          score:
+          <input type="number" placeholder="0" id="team1Score" />
+        </p>
+        <p>
+          Round Winner?
+          <input type="checkbox" id="team1RoundWin" />
+        </p>
+        <p>
+          Did you lay any 200's:
+          <input type="checkbox" id="team1No200" />
+        </p>
+        <p>
+          Num Coup Forres:
+          <input type="number" placeholder="0" id="team1CoupForres" />
+        </p>
+        <p>
+          Num Safety Cards:
+          <input type="number" placeholder="0" id="team1Safeties" />
+        </p>
+
+        <p id="team1RoundScore">Round Score</p>
+        <button id="team1CalcScore_btn">Calculate score</button>
+        <p id="showScoresPlayer1">RoundScores</p>
+      </div>
+      <!-- PLAYER 2 -->
+      <div class="player">
+        <p id="player2Name">Player 2</p>
+        <p input type="string" id="player2Name">Player 2</p>
+        <p>
+          score:
+          <input type="number" placeholder="0" id="team2Score" />
+        </p>
+        <p>
+          Round Winner?
+          <input type="checkbox" id="team2RoundWin" />
+        </p>
+        <p>
+          Did you lay any 200's:
+          <input type="checkbox" id="team2No200" />
+        </p>
+        <p>
+          Num Coup Forres:
+          <input type="number" placeholder="0" id="team2CoupForres" />
+        </p>
+        <p>
+          Num Safety Cards:
+          <input type="number" placeholder="0" id="team2Safeties" />
+        </p>
+
+        <p id="team2RoundScore">Round Score</p>
+        <button id="team2CalcScore_btn">Calculate score</button>
+        <p id="showScoresPlayer2">RoundScores</p>
+      </div>
+    </div>
+
+    <footer class="results">
+      <div class="box">Footer</div>
+    </footer>
+
+    <script src="index.js"></script>
   </body>
 </html>
