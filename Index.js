@@ -9,6 +9,7 @@ const noTwohundreds = 300;
 let teamOneScores = [];
 let teamTwoScores = [];
 let scores = {
+  playerName :"",
   roundScore: 0,
   roundWinner: 0,
   coupForres: 0,
