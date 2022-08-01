@@ -6,8 +6,8 @@ const allCardsPlayed = 300;
 const safeTrip = 300;
 const roundWinner = 500;
 const noTwohundreds = 300;
-let teamOneScores = [];
-let teamTwoScores = [];
+let team1GameScores = [];
+let team2GameScores = [];
 let team1Scores = {
   teamNumber:1,
   playerName :"",
@@ -19,7 +19,7 @@ let team1Scores = {
   totalRoundScore: 0,
 };
 
-let team2Scores = {
+let team2Scores = [{
   teamNumber:2,
   playerName :"",
   roundScore: 0,
@@ -28,146 +28,117 @@ let team2Scores = {
   safetyCards: 0,
   noTwoHundreds: 0,
   totalRoundScore: 0,
-};
+}];
 
-const team1PlayerName = document.getElementById("player1Name")
+const team1Name = document.getElementById("team1Name")
 const team1CalcScore = document.getElementById("team1CalcScore_btn");
-const team2CalcScore = document.getElementById("team2CalcScore_btn");
 const team1Score = document.getElementById("team1Score");
 const team1RoundWinner = document.getElementById("team1RoundWin");
 const team1TwoHundredsUsed = document.getElementById("team1No200");
-const player1Scores = document.getElementById("showScoresPlayer1");
-const player1Name = document.getElementById("player1Name");
-const playerScore = document.getElementById("team1Score");
+const showTeam1Scores = document.getElementById("showScoresTeam1");
+const t1Scores = document.getElementById("t1Score")
+// const player1Name = document.getElementById("player1Name");
 const team1NumCoupForres = document.getElementById("team1CoupForres");
 const team1NumSafeties = document.getElementById("team1Safeties");
+const Team1GameScore = document.getElementById("team1GameScore")
 
-const team2PlayerName = document.getElementById("player2Name")
-const team2Score = document.getElementById("team2Score");
-const team2RoundWinner = document.getElementById("team2RoundWin");
-const team2TwoHundredsUsed = document.getElementById("team2No200");
-const player2Scores = document.getElementById("showScoresPlayer2");
-const player2Name = document.getElementById("player2Name");
-const player2Score = document.getElementById("team2Score");
-const team2NumCoupForres = document.getElementById("team2CoupForres");
-const team2NumSafeties = document.getElementById("team2Safeties");
+team1TwoHundredsUsed.disabled = true
+// team2TwoHundredsUsed.disabled = true
 
-team1PlayerName.addEventListener("change",function(){
-  team1Scores.playerName =   team1PlayerName.value
+team1Name.addEventListener("change",function(){
+  team1Scores.playerName =   team1Name.value
 })
-
-team1NumSafeties.addEventListener("change", function () {
-  team1Scores.safetyCards = parseInt(team1NumSafeties.value) * safetyCard;
-
+team1Score.addEventListener("change", function (e) {
+  team1Scores.roundScore = parseInt(team1Score.value);
   calcScores(team1Scores);
 });
-team1NumCoupForres.addEventListener("change", function () {
-  console.log(team1NumCoupForres.value);
-  team1Scores.coupForres = parseInt(team1NumCoupForres.value) * coupForre;
-
-  calcScores(team1Scores);
-});
-
-playerScore.addEventListener("change", function (e) {
-  team1Scores.roundScore = parseInt(playerScore.value);
-  calcScores(team1Scores);
-});
-
 team1RoundWinner.addEventListener("click", function () {
+  console.log("rnd winner")
   let ischecked = team1RoundWinner.checked;
   if (ischecked === true) {
     team1Scores.roundWinner = roundWinner;
+    team1TwoHundredsUsed.disabled = false
   } else {
     team1Scores.roundWinner = 0;
+    team1TwoHundredsUsed.disabled = true
+    team1TwoHundredsUsed.checked = false
+    team1Scores.noTwoHundreds = 0;
   }
+  console.log(`team display:${team1Scores}`);
   calcScores(team1Scores);
-  //   console.log(scores);
+    
 });
 team1TwoHundredsUsed.addEventListener("click", function () {
-  let ischecked = team2TwoHundredsUsed.checked;
+  let ischecked = team1TwoHundredsUsed.checked;
+  console.log(ischecked)
   if (ischecked === false) {
     team1Scores.noTwoHundreds = noTwohundreds;
   } else {
+    console.log("200's checked")
     team1Scores.noTwoHundreds = 0;
   }
   calcScores(team1Scores);
   //   console.log(scores);
 });
-
-team1CalcScore.addEventListener("change", function () {
-  player1Name.innerHTML = "bill";
-  calcScores();
+team1NumCoupForres.addEventListener("change", function () {
+  console.log(team1NumCoupForres.value);
+    if (parseInt(team1NumCoupForres.value)===0){
+      team1Scores.coupForres =0}
+      else{  
+    team1Scores.coupForres = parseInt(team1NumCoupForres.value) * coupForre;
+    }
+  calcScores(team1Scores);
 });
-team2CalcScore.addEventListener("click", function () {
-  console.log("team 2 score");
-});
-
-// PLAYER 2
-team2PlayerName.addEventListener("change",function(){
-  team2Scores.playerName =   team2PlayerName.value
-})
-playerScore.addEventListener("change", function (e) {
-  team2Scores.roundScore = parseInt(playerScore.value);
-  calcScores(team2Scores);
-});
-team2RoundWinner.addEventListener("click", function () {
-  let ischecked = team2RoundWinner.checked;
-  if (ischecked === true) {
-    team2Scores.roundWinner = roundWinner;
-  } else {
-    team2Scores.roundWinner = 0;
+team1NumSafeties.addEventListener("change", function () {
+  if (parseInt(team1NumSafeties.value) ===0){
+    team1Scores.safetyCards = 0
+  }else{
+  team1Scores.safetyCards = parseInt(team1NumSafeties.value) * safetyCard;
   }
-  calcScores(team2Scores);
-  //   console.log(scores);
-});
-team2NumSafeties.addEventListener("change", function () {
-  team2Scores.safetyCards = parseInt(team2NumSafeties.value) * safetyCard;
-
-  calcScores(team2Scores);
-});
-team2NumCoupForres.addEventListener("change", function () {
-  console.log(team2NumCoupForres.value);
-  team2Scores.coupForres = parseInt(team2NumCoupForres.value) * coupForre;
-
-  calcScores(team2Scores);
+  calcScores(team1Scores);
 });
 
+function clearFields(team){
 
-
-team2TwoHundredsUsed.addEventListener("click", function () {
-  let ischecked = team2TwoHundredsUsed.checked;
-  if (ischecked === false) {
-    team2Scores.noTwoHundreds = noTwohundreds;
-  } else {
-    team2Scores.noTwoHundreds = 0;
+  if (team===1){
+  team1Scores.innerHTML = `round score: `;
+  team1Score.value = 0
+team1NumCoupForres.value = 0
+team1NumSafeties.value=0 
+team1RoundWinner.checked = false
+team1TwoHundredsUsed.disabled = true
+team1TwoHundredsUsed.checked = false
+showTeam1Scores.innerHTML= "Round Scores: 0"
+  }else{
+    //Clear team 2
   }
-  calcScores(team2Scores);
-  //   console.log(team2Scores);
+}
+nextRound_btn.addEventListener("click", function () {
+  console.log("next rnd")
+  team1GameScores.push(team1Scores.totalRoundScore)
+  // Team1GameScore.innerHTML = team1Scores.totalRoundScore
+  team1Scores.innerHTML = `round score: 0`;
+  // team2GameScores.push(team2Scores.totalRoundScore)
+  // Team2GameScore.innerHTML = team2Scores.totalRoundScore
+for (let i=0;i<team1GameScores.length;i++){
+  Team1GameScore.innerHTML = `${team1Scores.playerName} Scored:  ${team1Scores.totalRoundScore}`
+}
+clearFields(1)
 });
 
-team2CalcScore.addEventListener("change", function () {
-  console.log("team 2 score");
-  player2Name.innerHTML = "bill";
-  calcScores(team2Scores);
-});
-team2CalcScore.addEventListener("click", function () {
-  console.log("team 2 score");
-});
-//
 function calcScores(team) {
-  console.log(team);
   team.totalRoundScore = 0;
-  team.totalRoundScore =
+  team.totalRoundScore +=
   team.roundScore +
   team.roundWinner +
   team.coupForres +
   team.safetyCards +
-  team.noTwoHundreds +
-  team.totalRoundScore;
-
-  if (team.teamNumber===1){
-      player1Scores.innerHTML = `round score ${team.totalRoundScore}`;
+  team.noTwoHundreds 
+  if (team.teamNumber===2){
+      player2Scores.innerHTML = `round score: ${team.totalRoundScore}`;
   }else{
-    player2Scores.innerHTML = `round score ${team.totalRoundScore}`;
+    showTeam1Scores.innerHTML = `round score: ${team.totalRoundScore}`;
+
+    // t1Scores.innerHTML = `round score ${team.totalRoundScore}`;
   }
 }

@@ -26,9 +26,8 @@
     </nav>
     <div class="scores">
       <div class="player">
-        <p  >Player 1:
-        <input type="string" id="player1Name"></p>
-        
+        <p  >Team 1:
+        <input type="string" id="team1Name"></p>
         <p>
           score:
           <input type="number" placeholder="0" id="team1Score" />
@@ -50,13 +49,20 @@
           <input type="number" placeholder="0" id="team1Safeties" />
         </p>
 
-        <p id="team1RoundScore">Round Score</p>
-        <button id="team1CalcScore_btn">Calculate score</button>
-        <p id="showScoresPlayer1">RoundScores</p>
+        <!-- <p id="team1RoundScore">Round Score</p> -->
+       
+        <p id="showScoresTeam1">RoundScores</p>
+        <button id="nextRound_btn">Next Round</button>
+        <p id="team1GameScore"> Game Score:
+          <!-- <p id="t1Score">t1 score</p> -->
+
+        </p>
+
+
       </div>
       <!-- PLAYER 2 -->
       <div class="player">
-        <p  >Player 2:
+        <p  >Team 2:
           <input type="string" id="player2Name"></p>
           
           <p>
@@ -79,13 +85,19 @@
           Num Safety Cards:
           <input type="number" placeholder="0" id="team2Safeties" />
         </p>
-
-        <p id="team2RoundScore">Round Score</p>
-        <button id="team2CalcScore_btn">Calculate score</button>
         <p id="showScoresPlayer2">RoundScores</p>
+        <!-- <p id="team2RoundScore">Round Score</p> -->
+        <button id="team2CalcScore_btn">Next Round</button>
+
+        <p id="team2GameScore"> Game Score:
+
+        </p>
       </div>
     </div>
-
+<div class="roundScores">
+Hello
+<!-- create dynmic tables or list of round scores  -->
+</div>
     <footer class="results">
       <div class="box">Footer</div>
     </footer>
