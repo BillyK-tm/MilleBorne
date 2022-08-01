@@ -8,27 +8,30 @@ const roundWinner = 500;
 const noTwohundreds = 300;
 let team1GameScores = [];
 let team2GameScores = [];
+let roundCount = 1
 let team1Scores = {
   teamNumber:1,
-  playerName :"",
+  teamName :"Team1",
   roundScore: 0,
   roundWinner: 0,
   coupForres: 0,
   safetyCards: 0,
   noTwoHundreds: 0,
   totalRoundScore: 0,
+  totalGameScore :0
 };
 
-let team2Scores = [{
+let team2Scores = {
   teamNumber:2,
-  playerName :"",
+  teamName :"Team2",
   roundScore: 0,
   roundWinner: 0,
   coupForres: 0,
   safetyCards: 0,
   noTwoHundreds: 0,
   totalRoundScore: 0,
-}];
+  totalGameScore :0
+};
 
 const team1Name = document.getElementById("team1Name")
 const team1CalcScore = document.getElementById("team1CalcScore_btn");
@@ -41,12 +44,14 @@ const t1Scores = document.getElementById("t1Score")
 const team1NumCoupForres = document.getElementById("team1CoupForres");
 const team1NumSafeties = document.getElementById("team1Safeties");
 const Team1GameScore = document.getElementById("team1GameScore")
+const roundScores = document.getElementById("roundScores")
 
 team1TwoHundredsUsed.disabled = true
+nextRound_btn.disabled = true
 // team2TwoHundredsUsed.disabled = true
 
 team1Name.addEventListener("change",function(){
-  team1Scores.playerName =   team1Name.value
+  team1Scores.teamName =   team1Name.value
 })
 team1Score.addEventListener("change", function (e) {
   team1Scores.roundScore = parseInt(team1Score.value);
@@ -99,32 +104,90 @@ team1NumSafeties.addEventListener("change", function () {
 });
 
 function clearFields(team){
-
-  if (team===1){
-  team1Scores.innerHTML = `round score: `;
-  team1Score.value = 0
-team1NumCoupForres.value = 0
-team1NumSafeties.value=0 
-team1RoundWinner.checked = false
-team1TwoHundredsUsed.disabled = true
-team1TwoHundredsUsed.checked = false
-showTeam1Scores.innerHTML= "Round Scores: 0"
+  if (team.teamNumber ===1){
+      team1Scores.innerHTML = `round score: `;
+      team1Score.value = 0
+      team1NumCoupForres.value = 0
+      team1NumSafeties.value=0 
+      team1RoundWinner.checked = false
+      team1TwoHundredsUsed.disabled = true
+      team1TwoHundredsUsed.checked = false
+      showTeam1Scores.innerHTML= "Round Scores: 0"
   }else{
     //Clear team 2
   }
 }
-nextRound_btn.addEventListener("click", function () {
-  console.log("next rnd")
-  team1GameScores.push(team1Scores.totalRoundScore)
-  // Team1GameScore.innerHTML = team1Scores.totalRoundScore
-  team1Scores.innerHTML = `round score: 0`;
-  // team2GameScores.push(team2Scores.totalRoundScore)
-  // Team2GameScore.innerHTML = team2Scores.totalRoundScore
-for (let i=0;i<team1GameScores.length;i++){
-  Team1GameScore.innerHTML = `${team1Scores.playerName} Scored:  ${team1Scores.totalRoundScore}`
+function clearObjects(){
+  team1Scores = {
+    teamNumber:1,
+    teamName :"Team1",
+    roundScore: 0,
+    roundWinner: 0,
+    coupForres: 0,
+    safetyCards: 0,
+    noTwoHundreds: 0,
+    totalRoundScore: 0,
+    totalGameScore :0
+  };
+  
+   team2Scores = {
+    teamNumber:2,
+    teamName :"Team2",
+    roundScore: 0,
+    roundWinner: 0,
+    coupForres: 0,
+    safetyCards: 0,
+    noTwoHundreds: 0,
+    totalRoundScore: 0,
+    totalGameScore :0
+  }
 }
-clearFields(1)
+
+newGame_btn.addEventListener("click", function(){
+  clearFields(team1Scores)
+  // clearFields(team2Scores)
+  nextRound_btn.disabled = false
+})
+
+nextRound_btn.addEventListener("click", function () {
+
+  team1Scores.totalGameScore += team1Scores.totalRoundScore
+  team1Scores.innerHTML = `round score: 0`;
+
+  team1GameScores.push(team1Scores)
+  console.log(team1GameScores)
+  updateRoundScores(team1Scores)
+  clearFields(team1Scores)
+
 });
+
+function updateRoundScores(team){
+  roundScores.innerHTML=""
+  let listItems = ""
+  console.log(team)
+  listItems += `
+    <table id="roundScores">
+    <tr>
+      <th>Round Number</th>
+      <th>Team</th>
+      <th>Score</th>
+      <th>Total Score</th>
+  </tr>
+  <tr>
+  <td>${roundCount}</td>
+  <td>${team.teamName}</td>
+    <td>${team.totalRoundScore}</td>
+    <td>${team.totalGameScore}</td>
+  </tr>
+  <tr>
+  <td>${roundCount}</td>
+  <td>${team.teamName}</td>
+    <td>${team.totalRoundScore}</td>
+    <td>${team.totalGameScore}</td>
+  </tr>
+  `
+roundScores.innerHTML += listItems
+}
 
 function calcScores(team) {
   team.totalRoundScore = 0;
@@ -134,6 +197,7 @@ function calcScores(team) {
   team.coupForres +
   team.safetyCards +
   team.noTwoHundreds 
+  
   if (team.teamNumber===2){
       player2Scores.innerHTML = `round score: ${team.totalRoundScore}`;
   }else{
@@ -141,4 +205,5 @@ function calcScores(team) {
 
     // t1Scores.innerHTML = `round score ${team.totalRoundScore}`;
   }
+
 }

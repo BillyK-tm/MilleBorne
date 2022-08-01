@@ -1,4 +1,4 @@
-
+let roundCount = 0
 const team2PlayerName = document.getElementById("player2Name")
 const team2CalcScore = document.getElementById("team2CalcScore_btn");
 const team2Score = document.getElementById("team2Score");
