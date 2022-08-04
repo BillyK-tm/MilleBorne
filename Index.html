@@ -38,8 +38,7 @@
           <input type="checkbox" id="team1RoundWin" />
         </p>
         <p>
-          Did you lay any 200's:
-          <input type="checkbox" id="team1No200" />
+          Did you lay any 200's:? <input type="checkbox" id="team1No200Yes" />
         </p>
         <p>
           Num Coup Forres:
@@ -51,16 +50,13 @@
         </p>
 
         <p id="showScoresTeam1">RoundScores</p>
-        <button id="newGame_btn">New game</button>
-        <button id="nextRound_btn">Next Round</button>
-        <p id="team1GameScore">Game Score:</p>
+        <p id="team1GameScore">Running Total:</p>
       </div>
       <!-- PLAYER 2 -->
       <div class="player">
         <p>
-          Team 2: <input type="string" placeholder="Team 2" id="player2Name" />
+          Team 2: <input type="string" placeholder="Team2" id="team2Name" />
         </p>
-
         <p>
           score:
           <input type="number" placeholder="0" id="team2Score" />
@@ -71,7 +67,7 @@
         </p>
         <p>
           Did you lay any 200's:
-          <input type="checkbox" id="team2No200" />
+          <input type="checkbox" id="team2No200Yes" />
         </p>
         <p>
           Num Coup Forres:
@@ -81,17 +77,21 @@
           Num Safety Cards:
           <input type="number" placeholder="0" id="team2Safeties" />
         </p>
-        <p id="showScoresPlayer2">RoundScores</p>
-        <button id="team2CalcScore_btn">Next Round</button>
 
-        <p id="team2GameScore">Game Score:</p>
+        <p id="showScoresTeam2">RoundScores</p>
+        <!-- <button id="newGame_btn">New game</button>
+        <button id="nextRound_btn">Next Round</button> -->
+        <p id="team2GameScore">Running Total:</p>
       </div>
     </div>
-    <div id="roundScores">Hello</div>
     <footer class="results">
-      <div class="box">Footer</div>
+      <div class="box">
+        <button id="newGame_btn">New game</button>
+        <button id="nextRound_btn">Next Round</button>
+      </div>
     </footer>
 
     <script src="index.js"></script>
+    <script src="./exportdata.js"></script>
   </body>
 </html>
