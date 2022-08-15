@@ -9,6 +9,7 @@ const roundWinner = 500;
 const noTwohundreds = 300;
 const winningScore = 5000;
 let roundCount = 1;
+let teamScores = [0, 0];
 
 let team1Scores = {
   teamNumber: 1,
@@ -17,9 +18,8 @@ let team1Scores = {
   roundWinner: 0,
   coupForres: 0,
   safetyCards: 0,
-  noTwoHundreds: 0,
+  noTwoHundreds: noTwohundreds,
   totalRoundScore: 0,
-  totalGameScore: 0,
 };
 
 let team2Scores = {
@@ -29,9 +29,8 @@ let team2Scores = {
   roundWinner: 0,
   coupForres: 0,
   safetyCards: 0,
-  noTwoHundreds: 0,
+  noTwoHundreds: noTwohundreds,
   totalRoundScore: 0,
-  totalGameScore: 0,
 };
 
 const team1Name = document.getElementById("team1Name");
@@ -58,7 +57,8 @@ const team2NumCoupForres = document.getElementById("team2CoupForres");
 const team2NumSafeties = document.getElementById("team2Safeties");
 const Team2GameScore = document.getElementById("team2GameScore");
 
-nextRound_btn.disabled = true;
+// nextRound_btn.disabled = true;
+nextRound_btn.style.visibility = "hidden";
 
 team1Name.addEventListener("change", function () {
   team1Scores.teamName = team1Name.value;
@@ -183,7 +183,7 @@ function clearObjects(team) {
   team.roundWinner = 0;
   team.coupForres = 0;
   team.safetyCards = 0;
-  team.noTwoHundreds = 0;
+  team.noTwoHundreds = noTwohundreds;
   team.totalRoundScore = 0;
 
   if (newGame === true) {
@@ -202,14 +202,18 @@ newGame_btn.addEventListener("click", function () {
   showTeam2Scores.innerHTML = "Round Scores:";
   Team1GameScore.innerHTML = "Running Total:";
   Team2GameScore.innerHTML = "Running Total:";
+  nextRound_btn.style.visibility = "visible";
 });
 
 nextRound_btn.addEventListener("click", function () {
-  team1Scores.totalGameScore += team1Scores.totalRoundScore;
-  team2Scores.totalGameScore += team2Scores.totalRoundScore;
-
-  Team1GameScore.innerHTML = `Running Total: ${team1Scores.totalGameScore}`;
-  Team2GameScore.innerHTML = `Running Total: ${team2Scores.totalGameScore}`;
+  console.log(
+    `BEFORE:- team 1: ${team1Scores.totalGameScore} / Team 2:${team2Scores.totalGameScore}`
+  );
+  teamScores[0] += team1Scores.totalRoundScore;
+  teamScores[1] += team2Scores.totalRoundScore;
+  console.log(`AFTER:- team 1: ${teamScores[0]} / Team 2:${teamScores[1]}`);
+  Team1GameScore.innerHTML = `Running Total: ${teamScores[0]}`;
+  Team2GameScore.innerHTML = `Running Total: ${teamScores[1]}`;
 
   checkWinner();
   clearFields(team1Scores);
